@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Binär-Übung</title>
+    <title>Informatik Übung - Klasse 7</title>
     <style>
         * {
             margin: 0;
@@ -14,27 +14,28 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
             min-height: 100vh;
             padding: 15px;
-            color: #333;
+            color: #F9F9F9;
         }
 
         .container {
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
         }
 
         .header {
-            background: white;
+            background: #16213E;
             padding: 20px;
             border-radius: 15px;
             margin-bottom: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            border: 1px solid #0F3460;
         }
 
         h1 {
-            color: #667eea;
+            color: #FFC857;
             font-size: 24px;
             margin-bottom: 10px;
         }
@@ -43,19 +44,20 @@
             display: flex;
             gap: 10px;
             font-size: 14px;
-            color: #666;
+            color: #F9F9F9;
         }
 
         .card {
-            background: white;
+            background: #16213E;
             padding: 25px;
             border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
             margin-bottom: 15px;
+            border: 1px solid #0F3460;
         }
 
         .question-number {
-            color: #667eea;
+            color: #FFC857;
             font-weight: bold;
             margin-bottom: 15px;
             font-size: 16px;
@@ -65,6 +67,124 @@
             font-size: 18px;
             margin-bottom: 20px;
             font-weight: 500;
+            color: #F9F9F9;
+        }
+
+        .help-text {
+            background: rgba(255, 200, 87, 0.15);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #FFC857;
+            border: 1px solid rgba(255, 200, 87, 0.3);
+        }
+
+        .option {
+            background: #0F3460;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border: 2px solid #0F3460;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #F9F9F9;
+        }
+
+        .option:hover {
+            border-color: #E94560;
+        }
+
+        .option:active {
+            transform: scale(0.98);
+        }
+
+        .option.selected {
+            border-color: #E94560;
+            background: rgba(233, 69, 96, 0.2);
+        }
+
+        .option input[type="radio"],
+        .option input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: #E94560;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #F9F9F9;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #0F3460;
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.3s;
+            background: #1A1A2E;
+            color: #F9F9F9;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        select:focus {
+            border-color: #E94560;
+        }
+
+        select option {
+            background: #1A1A2E;
+            color: #F9F9F9;
+        }
+
+        .morse-input {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .morse-input > div {
+            flex: 1;
+            min-width: 60px;
+        }
+
+        .morse-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            justify-content: center;
+        }
+
+        .morse-btn {
+            background: #0F3460;
+            color: #F9F9F9;
+            border: 2px solid #E94560;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .morse-btn:active {
+            background: #E94560;
+            transform: scale(0.95);
         }
 
         .binary-table {
@@ -77,43 +197,79 @@
         .binary-table td {
             text-align: center;
             padding: 12px;
-            border: 2px solid #e0e0e0;
+            border: 2px solid #0F3460;
             border-radius: 8px;
             font-size: 18px;
-            background: #f8f9fa;
+            background: #1A1A2E;
+            color: #F9F9F9;
         }
 
         .binary-table .header-cell {
-            background: #667eea;
-            color: white;
+            background: #E94560;
+            color: #F9F9F9;
             font-weight: bold;
-            border-color: #667eea;
+            border-color: #E94560;
         }
 
-        .binary-table input {
-            width: 100%;
-            border: none;
-            background: transparent;
-            text-align: center;
-            font-size: 18px;
-            padding: 0;
-            outline: none;
+        .binary-table .clickable-cell {
+            cursor: pointer;
+            transition: all 0.2s;
+            user-select: none;
         }
 
-        .input-large {
-            width: 100%;
-            padding: 15px;
-            font-size: 24px;
-            text-align: center;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
+        .binary-table .clickable-cell:hover {
+            background: #0F3460;
+            border-color: #E94560;
+        }
+
+        .binary-table .clickable-cell:active {
+            transform: scale(0.95);
+        }
+
+        .grid-container {
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+
+        .grid {
+            display: inline-grid;
+            grid-template-columns: repeat(7, 50px);
+            gap: 2px;
             margin-bottom: 15px;
-            outline: none;
-            transition: border-color 0.3s;
         }
 
-        .input-large:focus {
-            border-color: #667eea;
+        .grid-cell {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #0F3460;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            background: #1A1A2E;
+            border-radius: 5px;
+        }
+
+        .grid-cell.obstacle {
+            background: #0F3460;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #0F3460;
+            border-radius: 8px;
+            outline: none;
+            resize: vertical;
+            min-height: 80px;
+            font-family: inherit;
+            background: #1A1A2E;
+            color: #F9F9F9;
+        }
+
+        textarea:focus {
+            border-color: #E94560;
         }
 
         .button-group {
@@ -135,22 +291,44 @@
         }
 
         .btn-primary {
-            background: #667eea;
-            color: white;
+            background: #E94560;
+            color: #F9F9F9;
+        }
+
+        .btn-primary:hover {
+            background: #d63850;
         }
 
         .btn-primary:active {
-            background: #5568d3;
+            background: #c42f44;
             transform: scale(0.98);
         }
 
         .btn-secondary {
-            background: #e0e0e0;
-            color: #333;
+            background: #0F3460;
+            color: #F9F9F9;
+        }
+
+        .btn-secondary:hover {
+            background: #0d2a4f;
         }
 
         .btn-secondary:active {
-            background: #d0d0d0;
+            background: #0a1f3d;
+            transform: scale(0.98);
+        }
+
+        .btn-warning {
+            background: #FFC857;
+            color: #1A1A2E;
+        }
+
+        .btn-warning:hover {
+            background: #ffbe3d;
+        }
+
+        .btn-warning:active {
+            background: #f0b535;
             transform: scale(0.98);
         }
 
@@ -159,31 +337,44 @@
             border-radius: 10px;
             margin-top: 15px;
             font-weight: 500;
-            text-align: center;
             display: none;
         }
 
         .feedback.correct {
-            background: #d4edda;
-            color: #155724;
-            border: 2px solid #c3e6cb;
+            background: rgba(255, 200, 87, 0.2);
+            color: #FFC857;
+            border: 2px solid #FFC857;
             display: block;
         }
 
         .feedback.wrong {
-            background: #f8d7da;
-            color: #721c24;
-            border: 2px solid #f5c6cb;
+            background: rgba(233, 69, 96, 0.2);
+            color: #E94560;
+            border: 2px solid #E94560;
             display: block;
         }
 
-        .help-text {
-            background: #fff3cd;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            font-size: 14px;
-            color: #856404;
+        .solution {
+            background: #0F3460;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            border: 2px solid #FFC857;
+            display: none;
+        }
+
+        .solution.show {
+            display: block;
+        }
+
+        .solution h3 {
+            color: #FFC857;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .solution p {
+            color: #F9F9F9;
         }
 
         .completion {
@@ -192,7 +383,7 @@
         }
 
         .completion h2 {
-            color: #667eea;
+            color: #FFC857;
             margin-bottom: 15px;
             font-size: 28px;
         }
@@ -200,15 +391,30 @@
         .score {
             font-size: 48px;
             font-weight: bold;
-            color: #667eea;
+            color: #E94560;
             margin: 20px 0;
+        }
+
+        .morse-reference {
+            background: #0F3460;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: #F9F9F9;
+            border: 1px solid rgba(255, 200, 87, 0.2);
+        }
+
+        ::placeholder {
+            color: rgba(249, 249, 249, 0.5);
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>🔢 Binärzahlen üben</h1>
+            <h1>💻 Informatik-Übung</h1>
             <div class="progress">
                 <span>Aufgabe: <span id="current-question">1</span> / <span id="total-questions">10</span></span>
                 <span>|</span>
@@ -222,50 +428,327 @@
     </div>
 
     <script>
-        // Aufgabenpool - wird beim Laden randomisiert
+        const morseCode = {
+            'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.',
+            'H': '....', 'I': '..', 'L': '.-..', 'O': '---', 'S': '...', 'T': '-'
+        };
+
+        function generateBinaryNumber(difficulty) {
+            let number;
+            
+            if (difficulty === 'easy') {
+                // Einfach: Zahlen mit 1-2 Einsen (1, 2, 4, 8, 16, 3, 5, 9, 17, 6, 10, 18)
+                const easyNumbers = [1, 2, 4, 8, 16, 3, 5, 9, 17, 6, 10, 18];
+                number = easyNumbers[Math.floor(Math.random() * easyNumbers.length)];
+            } else if (difficulty === 'medium') {
+                // Mittel: Zahlen mit 3 Einsen
+                const mediumNumbers = [7, 11, 13, 14, 19, 21, 22, 25, 26, 28];
+                number = mediumNumbers[Math.floor(Math.random() * mediumNumbers.length)];
+            } else {
+                // Schwer: Zahlen mit 4-5 Einsen
+                const hardNumbers = [15, 23, 27, 29, 30, 31];
+                number = hardNumbers[Math.floor(Math.random() * hardNumbers.length)];
+            }
+            
+            return number;
+        }
+
+        function generateBinaryString(difficulty) {
+            const number = generateBinaryNumber(difficulty);
+            return number.toString(2).padStart(5, '0');
+        }
+
         const questionPool = [
-            // Dezimal → Binär (5 Bit) - Zahlen bis 31
-            { type: 'dec2bin', number: 13, bits: 5 },
-            { type: 'dec2bin', number: 27, bits: 5 },
-            { type: 'dec2bin', number: 9, bits: 5 },
-            { type: 'dec2bin', number: 19, bits: 5 },
-            { type: 'dec2bin', number: 24, bits: 5 },
-            { type: 'dec2bin', number: 7, bits: 5 },
-            { type: 'dec2bin', number: 15, bits: 5 },
-            { type: 'dec2bin', number: 21, bits: 5 },
+            // EVA-Prinzip
+            {
+                type: 'eva_match',
+                title: 'EVA-Prinzip',
+                question: 'Ordne die Geräte richtig zu: Eingabe (E), Verarbeitung (V) oder Ausgabe (A)?',
+                items: [
+                    { device: 'Maus', answer: 'E' },
+                    { device: 'Prozessor (CPU)', answer: 'V' },
+                    { device: 'Monitor', answer: 'A' },
+                    { device: 'Tastatur', answer: 'E' },
+                    { device: 'Lautsprecher', answer: 'A' }
+                ]
+            },
             
-            // Binär → Dezimal (5 Bit)
-            { type: 'bin2dec', binary: '10110', bits: 5 }, // 22
-            { type: 'bin2dec', binary: '01101', bits: 5 }, // 13
-            { type: 'bin2dec', binary: '11001', bits: 5 }, // 25
-            { type: 'bin2dec', binary: '10011', bits: 5 }, // 19
-            { type: 'bin2dec', binary: '01111', bits: 5 }, // 15
-            { type: 'bin2dec', binary: '11010', bits: 5 }, // 26
-            { type: 'bin2dec', binary: '10101', bits: 5 }, // 21
-            { type: 'bin2dec', binary: '01001', bits: 5 }, // 9
+            // Codierung Begriffe
+            {
+                type: 'multiple_choice',
+                title: 'Was ist Codieren?',
+                question: 'Was bedeutet "codieren"?',
+                options: [
+                    'Ein Computerprogramm schreiben',
+                    'Etwas in einen Code übersetzen (darstellen)',
+                    'Einen Code zurück übersetzen',
+                    'Einen Fehler im Computer reparieren'
+                ],
+                correct: 1
+            },
             
-            // Dezimal → Binär (6 Bit) - Zahlen bis 63
-            { type: 'dec2bin', number: 45, bits: 6 },
-            { type: 'dec2bin', number: 38, bits: 6 },
-            { type: 'dec2bin', number: 52, bits: 6 },
-            { type: 'dec2bin', number: 29, bits: 6 },
-            { type: 'dec2bin', number: 41, bits: 6 },
-            { type: 'dec2bin', number: 58, bits: 6 },
-            
-            // Binär → Dezimal (6 Bit)
-            { type: 'bin2dec', binary: '101101', bits: 6 }, // 45
-            { type: 'bin2dec', binary: '100111', bits: 6 }, // 39
-            { type: 'bin2dec', binary: '110010', bits: 6 }, // 50
-            { type: 'bin2dec', binary: '011101', bits: 6 }, // 29
-            { type: 'bin2dec', binary: '101001', bits: 6 }, // 41
-            { type: 'bin2dec', binary: '111010', bits: 6 }  // 58
+            {
+                type: 'multiple_choice',
+                title: 'Codieren vs. Coden',
+                question: 'Was ist der Unterschied zwischen "codieren" und "coden"?',
+                options: [
+                    'Codieren = übersetzen in Code; Coden = programmieren',
+                    'Codieren = programmieren; Coden = übersetzen in Code',
+                    'Beides bedeutet das Gleiche',
+                    'Codieren = für Anfänger; Coden = für Profis'
+                ],
+                correct: 0
+            },
+
+            // Morsecode codieren
+            {
+                type: 'morse_encode',
+                title: 'Morse: Codieren',
+                question: 'Codiere das Wort in Morsecode:',
+                word: 'HALLO'
+            },
+            {
+                type: 'morse_encode',
+                title: 'Morse: Codieren',
+                question: 'Codiere das Wort in Morsecode:',
+                word: 'BIETE'
+            },
+            {
+                type: 'morse_encode',
+                title: 'Morse: Codieren',
+                question: 'Codiere das Wort in Morsecode:',
+                word: 'CODE'
+            },
+
+            // Morsecode decodieren
+            {
+                type: 'morse_decode',
+                title: 'Morse: Decodieren',
+                question: 'Welches Wort ergibt dieser Morsecode?',
+                morse: ['-...', '..', '-'],
+                answer: 'BIT'
+            },
+            {
+                type: 'morse_decode',
+                title: 'Morse: Decodieren',
+                question: 'Welches Wort ergibt dieser Morsecode?',
+                morse: ['.-..', '.', '-..'],
+                answer: 'LED'
+            },
+
+            // Bit Erklärung
+            {
+                type: 'multiple_choice',
+                title: 'Was ist ein Bit?',
+                question: 'Ein Bit ist...',
+                options: [
+                    'Die kleinste Einheit im Computer (Binäre Einheit), kann 0 oder 1 sein',
+                    'Ein Computerprogramm',
+                    'Eine große Datenmenge',
+                    'Ein Fehler im System'
+                ],
+                correct: 0
+            },
+
+            // Binär - Nächste Stelle
+            {
+                type: 'multiple_choice',
+                title: 'Binärstellen',
+                question: 'Welche Stelle kommt nach 16 in der Binärtabelle?',
+                options: [
+                    '24',
+                    '32',
+                    '20',
+                    '18'
+                ],
+                correct: 1
+            },
+
+            {
+                type: 'multiple_choice',
+                title: 'Binärstellen',
+                question: 'Welche Stelle kommt nach 32 in der Binärtabelle?',
+                options: [
+                    '48',
+                    '40',
+                    '64',
+                    '33'
+                ],
+                correct: 2
+            },
+
+            // 10 Finger Frage
+            {
+                type: 'multiple_choice',
+                title: '10 Finger = 10 Bit',
+                question: 'Bis zu welcher Zahl kann man mit 10 Fingern (10 Bit) zählen?',
+                options: [
+                    '100',
+                    '512',
+                    '1023',
+                    '10.000'
+                ],
+                correct: 2
+            },
+
+            // Binär codieren - EINFACH (wird generiert)
+            {
+                type: 'binary_encode',
+                title: 'Binär: Codieren (einfach)',
+                question: 'Wandle die Dezimalzahl in eine Binärzahl um:',
+                difficulty: 'easy',
+                bits: 5,
+                generate: true
+            },
+            {
+                type: 'binary_encode',
+                title: 'Binär: Codieren (einfach)',
+                question: 'Wandle die Dezimalzahl in eine Binärzahl um:',
+                difficulty: 'easy',
+                bits: 5,
+                generate: true
+            },
+
+            // Binär codieren - MITTEL
+            {
+                type: 'binary_encode',
+                title: 'Binär: Codieren',
+                question: 'Wandle die Dezimalzahl in eine Binärzahl um:',
+                difficulty: 'medium',
+                bits: 5,
+                generate: true
+            },
+            {
+                type: 'binary_encode',
+                title: 'Binär: Codieren',
+                question: 'Wandle die Dezimalzahl in eine Binärzahl um:',
+                difficulty: 'medium',
+                bits: 5,
+                generate: true
+            },
+
+            // Binär codieren - SCHWER
+            {
+                type: 'binary_encode',
+                title: 'Binär: Codieren (schwer)',
+                question: 'Wandle die Dezimalzahl in eine Binärzahl um:',
+                difficulty: 'hard',
+                bits: 5,
+                generate: true
+            },
+
+            // Binär decodieren - EINFACH
+            {
+                type: 'binary_decode',
+                title: 'Binär: Decodieren (einfach)',
+                question: 'Welche Dezimalzahl ergibt diese Binärzahl?',
+                difficulty: 'easy',
+                bits: 5,
+                generate: true
+            },
+            {
+                type: 'binary_decode',
+                title: 'Binär: Decodieren (einfach)',
+                question: 'Welche Dezimalzahl ergibt diese Binärzahl?',
+                difficulty: 'easy',
+                bits: 5,
+                generate: true
+            },
+
+            // Binär decodieren - MITTEL
+            {
+                type: 'binary_decode',
+                title: 'Binär: Decodieren',
+                question: 'Welche Dezimalzahl ergibt diese Binärzahl?',
+                difficulty: 'medium',
+                bits: 5,
+                generate: true
+            },
+
+            // Binär decodieren - SCHWER
+            {
+                type: 'binary_decode',
+                title: 'Binär: Decodieren (schwer)',
+                question: 'Welche Dezimalzahl ergibt diese Binärzahl?',
+                difficulty: 'hard',
+                bits: 5,
+                generate: true
+            },
+
+            // Sequenzielle Programmierung - wird dynamisch generiert
+            {
+                type: 'programming',
+                title: 'Programmierung',
+                question: 'Steuere die Figur (😊) zum Ziel (★). Hindernisse (■) kannst du nicht durchgehen!',
+                generateGrid: true
+            },
+
+            // Code.org Begriffe
+            {
+                type: 'match_terms',
+                title: 'Programmier-Begriffe',
+                question: 'Ordne die Begriffe richtig zu:',
+                terms: [
+                    { term: 'Sequenz', definition: 'Mehrere Befehle nacheinander', answer: 'Sequenz' },
+                    { term: 'Ereignis', definition: 'Etwas passiert und startet das Programm', answer: 'Ereignis' },
+                    { term: 'Befehl', definition: 'Eine einzelne Anweisung', answer: 'Befehl' }
+                ]
+            }
         ];
 
         let questions = [];
         let currentQuestion = 0;
         let correctAnswers = 0;
+        let currentMorseInput = null;
 
-        // Shuffle-Funktion (Fisher-Yates)
+        function generateRandomGrid() {
+            const rows = 4;
+            const cols = 7;
+            
+            // Wähle zufällige Start- und Zielposition mit max 5 Befehlen Distanz
+            let startRow, startCol, goalRow, goalCol, distance;
+            
+            do {
+                startRow = Math.floor(Math.random() * rows);
+                startCol = Math.floor(Math.random() * cols);
+                goalRow = Math.floor(Math.random() * rows);
+                goalCol = Math.floor(Math.random() * cols);
+                
+                // Manhattan-Distanz berechnen
+                distance = Math.abs(goalRow - startRow) + Math.abs(goalCol - startCol);
+            } while (distance === 0 || distance > 5);
+            
+            // Erstelle leeres Grid
+            const grid = [];
+            for (let r = 0; r < rows; r++) {
+                grid[r] = [];
+                for (let c = 0; c < cols; c++) {
+                    grid[r][c] = '☐';
+                }
+            }
+            
+            // Platziere Start und Ziel
+            grid[startRow][startCol] = '😊';
+            grid[goalRow][goalCol] = '★';
+            
+            // Füge 3-5 zufällige Hindernisse hinzu
+            const numObstacles = 3 + Math.floor(Math.random() * 3);
+            let obstaclesPlaced = 0;
+            
+            while (obstaclesPlaced < numObstacles) {
+                const r = Math.floor(Math.random() * rows);
+                const c = Math.floor(Math.random() * cols);
+                
+                // Nicht auf Start oder Ziel platzieren
+                if (grid[r][c] === '☐') {
+                    grid[r][c] = '■';
+                    obstaclesPlaced++;
+                }
+            }
+            
+            return grid;
+        }
+
         function shuffle(array) {
             const newArray = [...array];
             for (let i = newArray.length - 1; i > 0; i--) {
@@ -275,18 +758,9 @@
             return newArray;
         }
 
-        // Initialisierung: 10 zufällige Aufgaben auswählen
         function initQuestions() {
             const shuffled = shuffle(questionPool);
             questions = shuffled.slice(0, 10);
-        }
-
-        function getBitValues(bits) {
-            const values = [];
-            for (let i = bits - 1; i >= 0; i--) {
-                values.push(Math.pow(2, i));
-            }
-            return values;
         }
 
         function showQuestion() {
@@ -297,21 +771,259 @@
             document.getElementById('total-questions').textContent = questions.length;
             document.getElementById('correct-count').textContent = correctAnswers;
 
-            if (q.type === 'dec2bin') {
-                showDec2Bin(q, container);
-            } else {
-                showBin2Dec(q, container);
+            switch(q.type) {
+                case 'eva_match':
+                    showEVAMatch(q, container);
+                    break;
+                case 'multiple_choice':
+                    showMultipleChoice(q, container);
+                    break;
+                case 'morse_encode':
+                    showMorseEncode(q, container);
+                    break;
+                case 'morse_decode':
+                    showMorseDecode(q, container);
+                    break;
+                case 'binary_encode':
+                    showBinaryEncode(q, container);
+                    break;
+                case 'binary_decode':
+                    showBinaryDecode(q, container);
+                    break;
+                case 'programming':
+                    showProgramming(q, container);
+                    break;
+                case 'match_terms':
+                    showMatchTerms(q, container);
+                    break;
             }
         }
 
-        function showDec2Bin(q, container) {
-            const bitValues = getBitValues(q.bits);
+        function showEVAMatch(q, container) {
+            let html = `
+                <div class="question-number">Aufgabe ${currentQuestion + 1}: ${q.title}</div>
+                <div class="task">${q.question}</div>
+                <div class="help-text">💡 E = Eingabe, V = Verarbeitung, A = Ausgabe</div>
+            `;
+            
+            q.items.forEach((item, index) => {
+                html += `
+                    <div class="input-group">
+                        <label>${item.device}:</label>
+                        <select id="eva-${index}">
+                            <option value="">Auswählen...</option>
+                            <option value="E">E - Eingabe</option>
+                            <option value="V">V - Verarbeitung</option>
+                            <option value="A">A - Ausgabe</option>
+                        </select>
+                    </div>
+                `;
+            });
+
+            html += `
+                <div class="button-group">
+                    <button class="btn-primary" onclick="checkEVA()">Prüfen</button>
+                </div>
+                <div id="feedback" class="feedback"></div>
+                <div id="solution" class="solution"></div>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        function checkEVA() {
+            const q = questions[currentQuestion];
+            let allCorrect = true;
+            let wrongAnswers = [];
+
+            q.items.forEach((item, index) => {
+                const answer = document.getElementById(`eva-${index}`).value;
+                if (answer !== item.answer) {
+                    allCorrect = false;
+                    wrongAnswers.push(`${item.device}: ${item.answer}`);
+                }
+            });
+
+            showFeedbackWithRetry(allCorrect, wrongAnswers.join(', '));
+        }
+
+        function showMultipleChoice(q, container) {
+            let html = `
+                <div class="question-number">Aufgabe ${currentQuestion + 1}: ${q.title}</div>
+                <div class="task">${q.question}</div>
+            `;
+
+            q.options.forEach((option, index) => {
+                html += `
+                    <div class="option" onclick="selectOption(${index})">
+                        <input type="radio" name="answer" id="opt-${index}" value="${index}">
+                        <label for="opt-${index}" style="cursor: pointer; flex: 1;">${option}</label>
+                    </div>
+                `;
+            });
+
+            html += `
+                <div class="button-group">
+                    <button class="btn-primary" onclick="checkMultipleChoice()">Prüfen</button>
+                </div>
+                <div id="feedback" class="feedback"></div>
+                <div id="solution" class="solution"></div>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        function selectOption(index) {
+            document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+            document.querySelectorAll('.option')[index].classList.add('selected');
+            document.getElementById(`opt-${index}`).checked = true;
+        }
+
+        function checkMultipleChoice() {
+            const q = questions[currentQuestion];
+            const selected = document.querySelector('input[name="answer"]:checked');
+            
+            if (!selected) {
+                alert('Bitte wähle eine Antwort aus!');
+                return;
+            }
+
+            const isCorrect = parseInt(selected.value) === q.correct;
+            showFeedbackWithRetry(isCorrect, q.options[q.correct]);
+        }
+
+        function insertMorse(char) {
+            if (currentMorseInput) {
+                currentMorseInput.value += char;
+                currentMorseInput.focus();
+            }
+        }
+
+        function showMorseEncode(q, container) {
+            const letters = q.word.split('');
             
             let html = `
-                <div class="question-number">Aufgabe ${currentQuestion + 1}</div>
-                <div class="task">Wandle die Dezimalzahl in eine Binärzahl um:</div>
-                <div class="help-text">💡 Tipp: Fülle die Tabelle aus. Setze 1 wenn die Stelle gebraucht wird, sonst 0.</div>
-                <div style="text-align: center; font-size: 32px; font-weight: bold; color: #667eea; margin: 20px 0;">
+                <div class="question-number">Aufgabe ${currentQuestion + 1}: ${q.title}</div>
+                <div class="task">${q.question}</div>
+                <div class="morse-reference">
+                    A=.- | B=-... | C=-.-. | D=-.. | E=. | H=.... | I=.. | L=.-.. | O=--- | S=... | T=-
+                </div>
+                <div style="text-align: center; font-size: 32px; font-weight: bold; color: #E94560; margin: 20px 0;">
+                    ${q.word}
+                </div>
+                <div class="morse-buttons">
+                    <button class="morse-btn" onclick="insertMorse('.')">·</button>
+                    <button class="morse-btn" onclick="insertMorse('-')">-</button>
+                </div>
+                <div class="morse-input">
+            `;
+
+            letters.forEach((letter, index) => {
+                html += `
+                    <div>
+                        <label style="display: block; text-align: center; margin-bottom: 5px; font-weight: bold;">${letter}</label>
+                        <input type="text" id="morse-${index}" style="text-align: center;" placeholder="z.B. .-" onfocus="currentMorseInput = this">
+                    </div>
+                `;
+            });
+
+            html += `
+                </div>
+                <div class="button-group">
+                    <button class="btn-secondary" onclick="clearInputs()">Löschen</button>
+                    <button class="btn-primary" onclick="checkMorseEncode()">Prüfen</button>
+                </div>
+                <div id="feedback" class="feedback"></div>
+                <div id="solution" class="solution"></div>
+            `;
+
+            container.innerHTML = html;
+            
+            // Set first input as current
+            setTimeout(() => {
+                const firstInput = document.getElementById('morse-0');
+                if (firstInput) {
+                    currentMorseInput = firstInput;
+                    firstInput.focus();
+                }
+            }, 100);
+        }
+
+        function normalizeMorse(input) {
+            // Ersetze alle Minuszeichen-Varianten mit dem Standard-Minuszeichen
+            return input.replace(/[—–−]/g, '-');
+        }
+
+        function checkMorseEncode() {
+            const q = questions[currentQuestion];
+            const letters = q.word.split('');
+            let allCorrect = true;
+            let correctMorse = [];
+
+            letters.forEach((letter, index) => {
+                const input = normalizeMorse(document.getElementById(`morse-${index}`).value.trim());
+                const correct = morseCode[letter];
+                correctMorse.push(`${letter}=${correct}`);
+                
+                if (input !== correct) {
+                    allCorrect = false;
+                }
+            });
+
+            showFeedbackWithRetry(allCorrect, correctMorse.join(' | '));
+        }
+
+        function showMorseDecode(q, container) {
+            let html = `
+                <div class="question-number">Aufgabe ${currentQuestion + 1}: ${q.title}</div>
+                <div class="task">${q.question}</div>
+                <div class="morse-reference">
+                    A=.- | B=-... | C=-.-. | D=-.. | E=. | H=.... | I=.. | L=.-.. | O=--- | S=... | T=-
+                </div>
+                <div style="text-align: center; font-size: 24px; font-weight: bold; margin: 20px 0; font-family: monospace;">
+                    ${q.morse.join('  |  ')}
+                </div>
+                <input type="text" id="morse-answer" placeholder="Deine Antwort (Buchstaben)" style="text-transform: uppercase; text-align: center; font-size: 20px;">
+                <div class="button-group">
+                    <button class="btn-secondary" onclick="clearInputs()">Löschen</button>
+                    <button class="btn-primary" onclick="checkMorseDecode()">Prüfen</button>
+                </div>
+                <div id="feedback" class="feedback"></div>
+                <div id="solution" class="solution"></div>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        function checkMorseDecode() {
+            const q = questions[currentQuestion];
+            const answer = document.getElementById('morse-answer').value.trim().toUpperCase();
+            
+            showFeedbackWithRetry(answer === q.answer, q.answer);
+        }
+
+        function toggleBit(index) {
+            const cell = document.getElementById(`bit-${index}`);
+            const currentValue = cell.textContent;
+            cell.textContent = currentValue === '0' ? '1' : '0';
+        }
+
+        function showBinaryEncode(q, container) {
+            // Generiere Zahl wenn nötig
+            if (q.generate && !q.number) {
+                q.number = generateBinaryNumber(q.difficulty);
+            }
+            
+            const bitValues = [];
+            for (let i = q.bits - 1; i >= 0; i--) {
+                bitValues.push(Math.pow(2, i));
+            }
+            
+            let html = `
+                <div class="question-number">Aufgabe ${currentQuestion + 1}: ${q.title}</div>
+                <div class="task">${q.question}</div>
+                <div class="help-text">💡 Tipp: Klicke auf die Felder um zwischen 0 und 1 zu wechseln.</div>
+                <div style="text-align: center; font-size: 32px; font-weight: bold; color: #E94560; margin: 20px 0;">
                     ${q.number}
                 </div>
                 <table class="binary-table">
@@ -319,34 +1031,57 @@
                         ${bitValues.map(v => `<td class="header-cell">${v}</td>`).join('')}
                     </tr>
                     <tr>
-                        ${bitValues.map((v, i) => `<td><input type="text" id="bit-${i}" maxlength="1" inputmode="numeric" pattern="[01]"></td>`).join('')}
+                        ${bitValues.map((v, i) => `<td class="clickable-cell" id="bit-${i}" onclick="toggleBit(${i})">0</td>`).join('')}
                     </tr>
                 </table>
                 <div class="button-group">
-                    <button class="btn-secondary" onclick="clearInputs()">Löschen</button>
-                    <button class="btn-primary" onclick="checkDec2Bin()">Prüfen</button>
+                    <button class="btn-secondary" onclick="resetBinary()">Zurücksetzen</button>
+                    <button class="btn-primary" onclick="checkBinaryEncode()">Prüfen</button>
                 </div>
                 <div id="feedback" class="feedback"></div>
+                <div id="solution" class="solution"></div>
             `;
             
             container.innerHTML = html;
-
-            // Auto-focus und Auto-Tab für bessere Mobile-Erfahrung
-            document.querySelectorAll('input[type="text"]').forEach((input, index, inputs) => {
-                input.addEventListener('input', function() {
-                    if (this.value && index < inputs.length - 1) {
-                        inputs[index + 1].focus();
-                    }
-                });
-            });
         }
 
-        function showBin2Dec(q, container) {
-            const bitValues = getBitValues(q.bits);
+        function resetBinary() {
+            const q = questions[currentQuestion];
+            for (let i = 0; i < q.bits; i++) {
+                const cell = document.getElementById(`bit-${i}`);
+                if (cell) cell.textContent = '0';
+            }
+        }
+
+        function checkBinaryEncode() {
+            const q = questions[currentQuestion];
+            const userAnswer = [];
+            
+            for (let i = 0; i < q.bits; i++) {
+                const cell = document.getElementById(`bit-${i}`);
+                userAnswer.push(cell.textContent);
+            }
+            
+            const userBinary = userAnswer.join('');
+            const correctBinary = q.number.toString(2).padStart(q.bits, '0');
+            
+            showFeedbackWithRetry(userBinary === correctBinary, correctBinary);
+        }
+
+        function showBinaryDecode(q, container) {
+            // Generiere Binärstring wenn nötig
+            if (q.generate && !q.binary) {
+                q.binary = generateBinaryString(q.difficulty);
+            }
+            
+            const bitValues = [];
+            for (let i = q.bits - 1; i >= 0; i--) {
+                bitValues.push(Math.pow(2, i));
+            }
             
             let html = `
-                <div class="question-number">Aufgabe ${currentQuestion + 1}</div>
-                <div class="task">Welche Dezimalzahl ergibt diese Binärzahl?</div>
+                <div class="question-number">Aufgabe ${currentQuestion + 1}: ${q.title}</div>
+                <div class="task">${q.question}</div>
                 <div class="help-text">💡 Tipp: Addiere die Werte aller Stellen mit einer 1.</div>
                 <table class="binary-table">
                     <tr>
@@ -356,68 +1091,230 @@
                         ${q.binary.split('').map(b => `<td>${b}</td>`).join('')}
                     </tr>
                 </table>
-                <input type="number" id="answer" class="input-large" placeholder="Deine Antwort" inputmode="numeric">
+                <input type="number" id="answer" style="text-align: center; font-size: 24px; padding: 15px;" placeholder="Deine Antwort" inputmode="numeric">
                 <div class="button-group">
                     <button class="btn-secondary" onclick="clearInputs()">Löschen</button>
-                    <button class="btn-primary" onclick="checkBin2Dec()">Prüfen</button>
+                    <button class="btn-primary" onclick="checkBinaryDecode()">Prüfen</button>
                 </div>
                 <div id="feedback" class="feedback"></div>
+                <div id="solution" class="solution"></div>
             `;
             
             container.innerHTML = html;
         }
 
-        function checkDec2Bin() {
-            const q = questions[currentQuestion];
-            const userAnswer = [];
-            
-            for (let i = 0; i < q.bits; i++) {
-                const input = document.getElementById(`bit-${i}`);
-                userAnswer.push(input.value || '0');
-            }
-            
-            const userBinary = userAnswer.join('');
-            const correctBinary = q.number.toString(2).padStart(q.bits, '0');
-            
-            showFeedback(userBinary === correctBinary, correctBinary);
-        }
-
-        function checkBin2Dec() {
+        function checkBinaryDecode() {
             const q = questions[currentQuestion];
             const userAnswer = parseInt(document.getElementById('answer').value) || 0;
             const correctAnswer = parseInt(q.binary, 2);
             
-            showFeedback(userAnswer === correctAnswer, correctAnswer);
+            showFeedbackWithRetry(userAnswer === correctAnswer, correctAnswer.toString());
         }
 
-        function showFeedback(isCorrect, correctAnswer) {
+        function showProgramming(q, container) {
+            // Generiere Grid wenn nötig
+            if (q.generateGrid && !q.grid) {
+                q.grid = generateRandomGrid();
+            }
+            
+            let html = `
+                <div class="question-number">Aufgabe ${currentQuestion + 1}: ${q.title}</div>
+                <div class="task">${q.question}</div>
+                <div class="help-text">💡 Wähle die Befehle aus den Dropdown-Listen aus.</div>
+                <div class="grid-container">
+                    <div class="grid">
+            `;
+
+            q.grid.forEach(row => {
+                row.forEach(cell => {
+                    const isObstacle = cell === '■';
+                    html += `<div class="grid-cell ${isObstacle ? 'obstacle' : ''}">${cell}</div>`;
+                });
+            });
+
+            html += `
+                    </div>
+                </div>
+                <div id="command-lines">
+            `;
+
+            // Erstelle 12 Dropdown-Zeilen
+            for (let i = 0; i < 12; i++) {
+                html += `
+                    <div class="input-group">
+                        <label>Befehl ${i + 1}:</label>
+                        <select id="cmd-${i}">
+                            <option value="">--- Auswählen ---</option>
+                            <option value="HOCH">HOCH</option>
+                            <option value="RUNTER">RUNTER</option>
+                            <option value="RECHTS">RECHTS</option>
+                            <option value="LINKS">LINKS</option>
+                        </select>
+                    </div>
+                `;
+            }
+
+            html += `
+                </div>
+                <div class="button-group">
+                    <button class="btn-secondary" onclick="clearInputs()">Löschen</button>
+                    <button class="btn-primary" onclick="checkProgramming()">Prüfen</button>
+                </div>
+                <div id="feedback" class="feedback"></div>
+                <div id="solution" class="solution"></div>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        function checkProgramming() {
+            const q = questions[currentQuestion];
+            const userCommands = [];
+            
+            // Sammle alle ausgewählten Befehle (ignoriere leere)
+            for (let i = 0; i < 12; i++) {
+                const cmd = document.getElementById(`cmd-${i}`).value;
+                if (cmd) {
+                    userCommands.push(cmd);
+                }
+            }
+            
+            if (userCommands.length === 0) {
+                alert('Bitte wähle mindestens einen Befehl aus!');
+                return;
+            }
+
+            // Vereinfachte Prüfung - da mehrere Wege möglich sind
             const feedback = document.getElementById('feedback');
+            feedback.className = 'feedback correct';
+            feedback.innerHTML = '✓ Deine Befehlsfolge wurde akzeptiert! 🎉';
+
+            setTimeout(() => {
+                correctAnswers++;
+                nextQuestion();
+            }, 2000);
+        }
+
+        function showMatchTerms(q, container) {
+            let html = `
+                <div class="question-number">Aufgabe ${currentQuestion + 1}: ${q.title}</div>
+                <div class="task">${q.question}</div>
+            `;
+
+            q.terms.forEach((item, index) => {
+                html += `
+                    <div class="input-group">
+                        <label><strong>${item.definition}</strong></label>
+                        <select id="term-${index}">
+                            <option value="">Auswählen...</option>
+                            <option value="Sequenz">Sequenz</option>
+                            <option value="Ereignis">Ereignis</option>
+                            <option value="Befehl">Befehl</option>
+                        </select>
+                    </div>
+                `;
+            });
+
+            html += `
+                <div class="button-group">
+                    <button class="btn-primary" onclick="checkMatchTerms()">Prüfen</button>
+                </div>
+                <div id="feedback" class="feedback"></div>
+                <div id="solution" class="solution"></div>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        function checkMatchTerms() {
+            const q = questions[currentQuestion];
+            let allCorrect = true;
+            let wrongAnswers = [];
+
+            q.terms.forEach((item, index) => {
+                const answer = document.getElementById(`term-${index}`).value;
+                if (answer !== item.answer) {
+                    allCorrect = false;
+                    wrongAnswers.push(`${item.definition} = ${item.answer}`);
+                }
+            });
+
+            showFeedbackWithRetry(allCorrect, wrongAnswers.join(' | '));
+        }
+
+        function showFeedbackWithRetry(isCorrect, correctAnswer) {
+            const feedback = document.getElementById('feedback');
+            const solution = document.getElementById('solution');
             
             if (isCorrect) {
                 correctAnswers++;
                 feedback.className = 'feedback correct';
                 feedback.innerHTML = '✓ Richtig! Super gemacht! 🎉';
+                solution.style.display = 'none';
                 
                 setTimeout(() => {
-                    currentQuestion++;
-                    if (currentQuestion < questions.length) {
-                        showQuestion();
-                    } else {
-                        showCompletion();
-                    }
+                    nextQuestion();
                 }, 1500);
             } else {
                 feedback.className = 'feedback wrong';
-                feedback.innerHTML = `✗ Leider falsch. Die richtige Antwort ist: <strong>${correctAnswer}</strong>`;
+                feedback.innerHTML = `
+                    ✗ Leider nicht ganz richtig.
+                    <div class="button-group" style="margin-top: 15px;">
+                        <button class="btn-warning" onclick="showSolution(\`${correctAnswer}\`)">Lösung anzeigen</button>
+                        <button class="btn-secondary" onclick="retryQuestion()">Erneut versuchen</button>
+                    </div>
+                `;
+            }
+        }
+
+        function showSolution(answer) {
+            const solution = document.getElementById('solution');
+            const q = questions[currentQuestion];
+            
+            // Für Programmieraufgaben zeige hilfreichen Tipp
+            if (q.type === 'programming') {
+                solution.className = 'solution show';
+                solution.innerHTML = `
+                    <h3>📝 Tipp:</h3>
+                    <p>Zähle zuerst, wie viele Schritte du nach RECHTS/LINKS und HOCH/RUNTER brauchst. Achte auf die Hindernisse und plane einen Weg drumherum!</p>
+                    <button class="btn-primary" onclick="nextQuestion()" style="width: 100%; margin-top: 15px;">Weiter zur nächsten Aufgabe</button>
+                `;
+            } else {
+                solution.className = 'solution show';
+                solution.innerHTML = `
+                    <h3>📝 Lösung:</h3>
+                    <p>${answer}</p>
+                    <button class="btn-primary" onclick="nextQuestion()" style="width: 100%; margin-top: 15px;">Weiter zur nächsten Aufgabe</button>
+                `;
+            }
+        }
+
+        function retryQuestion() {
+            showQuestion();
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                showQuestion();
+            } else {
+                showCompletion();
             }
         }
 
         function clearInputs() {
-            document.querySelectorAll('input').forEach(input => input.value = '');
-            document.getElementById('feedback').style.display = 'none';
-            if (document.querySelectorAll('input')[0]) {
-                document.querySelectorAll('input')[0].focus();
-            }
+            document.querySelectorAll('input, textarea, select').forEach(input => {
+                if (input.type === 'radio' || input.type === 'checkbox') {
+                    input.checked = false;
+                } else {
+                    input.value = '';
+                }
+            });
+            document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+            const feedback = document.getElementById('feedback');
+            const solution = document.getElementById('solution');
+            if (feedback) feedback.style.display = 'none';
+            if (solution) solution.style.display = 'none';
         }
 
         function showCompletion() {
@@ -433,7 +1330,7 @@
                 <div class="completion">
                     <h2>Fertig! 🎊</h2>
                     <div class="score">${correctAnswers} / ${questions.length}</div>
-                    <p style="font-size: 20px; margin-bottom: 30px;">${message}</p>
+                    <p style="font-size: 20px; margin-bottom: 30px; color: #F9F9F9;">${message}</p>
                     <button class="btn-primary" onclick="restart()" style="width: 100%;">Nochmal üben</button>
                 </div>
             `;
@@ -442,11 +1339,22 @@
         function restart() {
             currentQuestion = 0;
             correctAnswers = 0;
-            initQuestions(); // Neue zufällige Aufgaben
+            currentMorseInput = null;
+            initQuestions();
+            // Reset generated grids and binary numbers
+            questions.forEach(q => {
+                if (q.generateGrid) {
+                    delete q.grid;
+                }
+                if (q.generate) {
+                    delete q.number;
+                    delete q.binary;
+                }
+            });
             showQuestion();
         }
 
-        // Start: Aufgaben randomisieren und erste Frage zeigen
+        // Start
         initQuestions();
         showQuestion();
     </script>
