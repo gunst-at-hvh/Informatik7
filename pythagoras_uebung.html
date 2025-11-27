@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pythagoras Übung</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .tabs {
+            display: flex;
+            background: #f0f0f0;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .tab:hover {
+            background: #e0e0e0;
+        }
+
+        .tab.active {
+            background: white;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 30px;
+            animation: fadeIn 0.3s;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .exercise {
+            background: #f9f9f9;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .exercise h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hint {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .hint strong {
+            color: #856404;
+        }
+
+        .input-group {
+            margin: 15px 0;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .input-group input {
+            width: 200px;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .input-group span {
+            margin-left: 10px;
+            color: #666;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #d0d0d0;
+        }
+
+        .feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            display: none;
+        }
+
+        .feedback.correct {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            color: #155724;
+            display: block;
+        }
+
+        .feedback.incorrect {
+            background: #f8d7da;
+            border: 2px solid #dc3545;
+            color: #721c24;
+            display: block;
+        }
+
+        svg {
+            display: block;
+            margin: 20px auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .info-icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 20px;
+            font-size: 14px;
+            cursor: help;
+        }
+
+        .formula-box {
+            background: #f0f4ff;
+            border: 2px solid #667eea;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .formula {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+            margin: 10px 0;
+        }
+
+        .interactive-section {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .slider-group {
+            margin: 20px 0;
+        }
+
+        .slider-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .slider-group input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: #ddd;
+            outline: none;
+        }
+
+        .slider-group input[type="range"]::-webkit-slider-thumb {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #667eea;
+            cursor: pointer;
+        }
+
+        .value-display {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .result-box {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .result-box strong {
+            color: #2e7d32;
+        }
+
+        .step {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 3px solid #667eea;
+            border-radius: 5px;
+        }
+
+        .real-world {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .real-world h3 {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📐 Pythagoras Übung</h1>
+            <p>Trainiere den Satz des Pythagoras Schritt für Schritt!</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab(0)">Übungsaufgaben</button>
+            <button class="tab" onclick="showTab(1)">Schritt-für-Schritt</button>
+            <button class="tab" onclick="showTab(2)">Interaktiv</button>
+            <button class="tab" onclick="showTab(3)">Praxisbeispiele</button>
+        </div>
+
+        <!-- Tab 1: Übungsaufgaben -->
+        <div class="tab-content active">
+            <div class="hint">
+                💡 <strong>Löse die Aufgaben Schritt für Schritt.</strong> Du bekommst Feedback zu deinen Antworten!<br>
+                <strong>Wichtig:</strong> Der Satz des Pythagoras gilt nur für rechtwinklige Dreiecke: <strong>a² + b² = c²</strong>
+            </div>
+
+            <div class="exercise">
+                <h3><span class="info-icon">i</span> Aufgabe 1: Hypotenuse berechnen</h3>
+                
+                <div class="hint">
+                    <strong>Tipp:</strong> Bei gegebenen Katheten a und b suchst du die Hypotenuse c:<br>
+                    c² = a² + b²  →  c = √(a² + b²)
+                </div>
+
+                <p><strong>Gegeben:</strong> a = 6 cm, b = 8 cm</p>
+
+                <svg width="300" height="200" viewBox="0 0 300 200">
+                    <line x1="50" y1="150" x2="50" y2="30" stroke="#000" stroke-width="2"/>
+                    <line x1="50" y1="150" x2="220" y2="150" stroke="#000" stroke-width="2"/>
+                    <line x1="50" y1="30" x2="220" y2="150" stroke="#667eea" stroke-width="3"/>
+                    <rect x="50" y="140" width="10" height="10" fill="none" stroke="#000" stroke-width="2"/>
+                    <text x="20" y="95" font-size="18" fill="#000" font-weight="bold">a = 6</text>
+                    <text x="120" y="175" font-size="18" fill="#000" font-weight="bold">b = 8</text>
+                    <text x="140" y="85" font-size="18" fill="#667eea" font-weight="bold">c = ?</text>
+                </svg>
+
+                <div class="input-group">
+                    <label>Hypotenuse c =</label>
+                    <input type="number" id="ex1-c" step="0.01" placeholder="0.00">
+                    <span>cm</span>
+                </div>
+
+                <div class="buttons">
+                    <button class="btn-primary" onclick="checkExercise1()">Prüfen</button>
+                    <button class="btn-secondary" onclick="clearExercise1()">Löschen</button>
+                </div>
+
+                <div id="feedback1" class="feedback"></div>
+            </div>
+
+            <div class="exercise">
+                <h3><span class="info-icon">i</span> Aufgabe 2: Kathete berechnen</h3>
+                
+                <div class="hint">
+                    <strong>Tipp:</strong> Bei gegebener Hypotenuse c und Kathete a suchst du Kathete b:<br>
+                    b² = c² - a²  →  b = √(c² - a²)
+                </div>
+
+                <p><strong>Gegeben:</strong> a = 5 cm, c = 13 cm</p>
+
+                <svg width="300" height="200" viewBox="0 0 300 200">
+                    <line x1="50" y1="150" x2="50" y2="50" stroke="#000" stroke-width="2"/>
+                    <line x1="50" y1="150" x2="210" y2="150" stroke="#667eea" stroke-width="3"/>
+                    <line x1="50" y1="50" x2="210" y2="150" stroke="#000" stroke-width="2"/>
+                    <rect x="50" y="140" width="10" height="10" fill="none" stroke="#000" stroke-width="2"/>
+                    <text x="20" y="105" font-size="18" fill="#000" font-weight="bold">a = 5</text>
+                    <text x="115" y="175" font-size="18" fill="#667eea" font-weight="bold">b = ?</text>
+                    <text x="140" y="95" font-size="18" fill="#000" font-weight="bold">c = 13</text>
+                </svg>
+
+                <div class="input-group">
+                    <label>Kathete b =</label>
+                    <input type="number" id="ex2-b" step="0.01" placeholder="0.00">
+                    <span>cm</span>
+                </div>
+
+                <div class="buttons">
+                    <button class="btn-primary" onclick="checkExercise2()">Prüfen</button>
+                    <button class="btn-secondary" onclick="clearExercise2()">Löschen</button>
+                </div>
+
+                <div id="feedback2" class="feedback"></div>
+            </div>
+
+            <div class="exercise">
+                <h3><span class="info-icon">i</span> Aufgabe 3: Dach-Problem</h3>
+                
+                <div class="hint">
+                    <strong>Wichtig:</strong> Die Dachhöhe teilt die Grundfläche in der Mitte!<br>
+                    Also: halbe Grundfläche = 10 m ÷ 2 = 5 m<br>
+                    Dann: h² + 5² = s²
+                </div>
+
+                <p><strong>Gegeben:</strong> Grundfläche = 10 m, Dachschräge s = 8 m</p>
+                <p><strong>Gesucht:</strong> Höhe h des Daches</p>
+
+                <svg width="300" height="180" viewBox="0 0 300 180">
+                    <rect x="70" y="110" width="160" height="50" fill="none" stroke="#000" stroke-width="2"/>
+                    <line x1="70" y1="110" x2="150" y2="40" stroke="#000" stroke-width="2"/>
+                    <line x1="230" y1="110" x2="150" y2="40" stroke="#000" stroke-width="2"/>
+                    <line x1="150" y1="110" x2="150" y2="40" stroke="#667eea" stroke-width="2" stroke-dasharray="5,5"/>
+                    <rect x="140" y="100" width="10" height="10" fill="none" stroke="#000" stroke-width="2"/>
+                    <line x1="70" y1="120" x2="150" y2="120" stroke="#999" stroke-width="1" stroke-dasharray="2,2"/>
+                    <text x="100" y="135" font-size="12" fill="#999">5 m</text>
+                    <text x="130" y="170" font-size="14" fill="#000" font-weight="bold">10 m</text>
+                    <text x="95" y="70" font-size="14" fill="#000" font-weight="bold">s = 8</text>
+                    <text x="155" y="80" font-size="14" fill="#667eea" font-weight="bold">h = ?</text>
+                </svg>
+
+                <div class="input-group">
+                    <label>Höhe h =</label>
+                    <input type="number" id="ex3-h" step="0.01" placeholder="0.00">
+                    <span>m</span>
+                </div>
+
+                <div class="buttons">
+                    <button class="btn-primary" onclick="checkExercise3()">Prüfen</button>
+                    <button class="btn-secondary" onclick="clearExercise3()">Löschen</button>
+                </div>
+
+                <div id="feedback3" class="feedback"></div>
+            </div>
+        </div>
+
+        <!-- Tab 2: Schritt-für-Schritt -->
+        <div class="tab-content">
+            <h2>🎯 Geführte Aufgabe mit Anleitung</h2>
+            
+            <div class="hint">
+                💡 <strong>So funktioniert's:</strong><br>
+                1. Wähle einen Aufgabentyp<br>
+                2. Gib die gegebenen Werte ein<br>
+                3. Folge den Schritten zur Lösung<br>
+                4. Jeder Schritt wird erklärt und visualisiert
+            </div>
+
+            <div class="interactive-section">
+                <label><strong>Wähle den Aufgabentyp:</strong></label>
+                <select id="taskType" onchange="updateGuidedTask()" style="padding: 10px; margin: 10px 0; font-size: 16px; border-radius: 5px; border: 2px solid #ddd;">
+                    <option value="hypotenuse">Hypotenuse c berechnen (gegeben: a, b)</option>
+                    <option value="cathetus">Kathete b berechnen (gegeben: a, c)</option>
+                </select>
+
+                <div id="guidedInputs">
+                    <div class="input-group">
+                        <label>Kathete a =</label>
+                        <input type="number" id="guided-a" value="3" step="0.1" oninput="calculateGuided()">
+                        <span>cm</span>
+                    </div>
+                    <div class="input-group">
+                        <label>Kathete b =</label>
+                        <input type="number" id="guided-b" value="4" step="0.1" oninput="calculateGuided()">
+                        <span>cm</span>
+                    </div>
+                </div>
+
+                <svg id="guidedTriangle" width="350" height="250" viewBox="0 0 350 250"></svg>
+
+                <div id="guidedSteps"></div>
+
+                <div id="guidedResult" class="result-box" style="display:none;"></div>
+            </div>
+        </div>
+
+        <!-- Tab 3: Interaktiv -->
+        <div class="tab-content">
+            <h2>🎮 Interaktives Dreieck</h2>
+            
+            <div class="hint">
+                💡 <strong>Experimentiere mit den Werten!</strong><br>
+                Bewege die Schieberegler und beobachte, wie sich das Dreieck und die berechneten Werte ändern.
+            </div>
+
+            <div class="interactive-section">
+                <div class="slider-group">
+                    <label>
+                        Kathete a: 
+                        <span class="value-display" id="slider-a-value">5 cm</span>
+                    </label>
+                    <input type="range" id="slider-a" min="1" max="15" value="5" step="0.5" oninput="updateInteractive()">
+                </div>
+
+                <div class="slider-group">
+                    <label>
+                        Kathete b: 
+                        <span class="value-display" id="slider-b-value">12 cm</span>
+                    </label>
+                    <input type="range" id="slider-b" min="1" max="15" value="12" step="0.5" oninput="updateInteractive()">
+                </div>
+
+                <svg id="interactiveTriangle" width="400" height="300" viewBox="0 0 400 300"></svg>
+
+                <div class="formula-box">
+                    <div class="formula" id="interactive-formula">a² + b² = c²</div>
+                    <div id="interactive-calculation"></div>
+                    <div class="result-box" id="interactive-result"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 4: Praxisbeispiele -->
+        <div class="tab-content">
+            <h2>🌍 Pythagoras in der Realität</h2>
+            
+            <div class="hint">
+                💡 <strong>Geometrie begegnet uns überall im Alltag!</strong> Hier sind einige spannende Beispiele.
+            </div>
+
+            <div class="real-world">
+                <h3>🏠 Leiter an der Wand</h3>
+                <p>Eine 5 Meter lange Leiter wird an eine Wand gelehnt. Der Fuß der Leiter steht 3 Meter von der Wand entfernt.</p>
+                <p><strong>Frage:</strong> Wie hoch reicht die Leiter an der Wand?</p>
+                
+                <div class="input-group" style="margin-top: 15px;">
+                    <label style="color: white;">Höhe h =</label>
+                    <input type="number" id="real1-h" step="0.01" placeholder="0.00">
+                    <span style="color: white;">m</span>
+                </div>
+                
+                <button class="btn-primary" onclick="checkReal1()" style="margin-top: 10px;">Prüfen</button>
+                <div id="feedbackReal1" class="feedback"></div>
+            </div>
+
+            <div class="real-world">
+                <h3>📺 TV-Bildschirmdiagonale</h3>
+                <p>Ein Fernseher ist 80 cm breit und 45 cm hoch.</p>
+                <p><strong>Frage:</strong> Wie lang ist die Bildschirmdiagonale in Zoll? (1 Zoll = 2,54 cm)</p>
+                
+                <div class="input-group" style="margin-top: 15px;">
+                    <label style="color: white;">Diagonale =</label>
+                    <input type="number" id="real2-d" step="0.1" placeholder="0.0">
+                    <span style="color: white;">Zoll</span>
+                </div>
+                
+                <button class="btn-primary" onclick="checkReal2()" style="margin-top: 10px;">Prüfen</button>
+                <div id="feedbackReal2" class="feedback"></div>
+            </div>
+
+            <div class="real-world">
+                <h3>⚽ Fußballplatz-Diagonale</h3>
+                <p>Ein Fußballplatz ist 105 Meter lang und 68 Meter breit.</p>
+                <p><strong>Frage:</strong> Wie weit ist es von einer Ecke zur gegenüberliegenden Ecke?</p>
+                
+                <div class="input-group" style="margin-top: 15px;">
+                    <label style="color: white;">Diagonale d =</label>
+                    <input type="number" id="real3-d" step="0.01" placeholder="0.00">
+                    <span style="color: white;">m</span>
+                </div>
+                
+                <button class="btn-primary" onclick="checkReal3()" style="margin-top: 10px;">Prüfen</button>
+                <div id="feedbackReal3" class="feedback"></div>
+            </div>
+
+            <div class="formula-box">
+                <h3>📐 Formelsammlung</h3>
+                <div class="formula">a² + b² = c²</div>
+                <p><strong>Hypotenuse berechnen:</strong> c = √(a² + b²)</p>
+                <p><strong>Kathete berechnen:</strong> a = √(c² - b²) oder b = √(c² - a²)</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab-Wechsel
+        function showTab(index) {
+            const tabs = document.querySelectorAll('.tab');
+            const contents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach((tab, i) => {
+                if (i === index) {
+                    tab.classList.add('active');
+                    contents[i].classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                    contents[i].classList.remove('active');
+                }
+            });
+
+            if (index === 1) updateGuidedTask();
+            if (index === 2) updateInteractive();
+        }
+
+        // Übung 1: Hypotenuse berechnen
+        function checkExercise1() {
+            const input = parseFloat(document.getElementById('ex1-c').value);
+            const correct = 10; // sqrt(6² + 8²) = 10
+            const feedback = document.getElementById('feedback1');
+            
+            if (Math.abs(input - correct) < 0.1) {
+                feedback.className = 'feedback correct';
+                feedback.textContent = '✓ Richtig! Die Hypotenuse ist 10 cm. Berechnung: c = √(6² + 8²) = √(36 + 64) = √100 = 10 cm';
+            } else {
+                feedback.className = 'feedback incorrect';
+                feedback.textContent = '✗ Nicht ganz. Tipp: c² = a² + b² = 6² + 8² = 36 + 64 = 100, also c = √100 = ?';
+            }
+        }
+
+        function clearExercise1() {
+            document.getElementById('ex1-c').value = '';
+            document.getElementById('feedback1').className = 'feedback';
+            document.getElementById('feedback1').textContent = '';
+        }
+
+        // Übung 2: Kathete berechnen
+        function checkExercise2() {
+            const input = parseFloat(document.getElementById('ex2-b').value);
+            const correct = 12; // sqrt(13² - 5²) = 12
+            const feedback = document.getElementById('feedback2');
+            
+            if (Math.abs(input - correct) < 0.1) {
+                feedback.className = 'feedback correct';
+                feedback.textContent = '✓ Richtig! Die Kathete b ist 12 cm. Berechnung: b = √(13² - 5²) = √(169 - 25) = √144 = 12 cm';
+            } else {
+                feedback.className = 'feedback incorrect';
+                feedback.textContent = '✗ Nicht ganz. Tipp: b² = c² - a² = 13² - 5² = 169 - 25 = 144, also b = √144 = ?';
+            }
+        }
+
+        function clearExercise2() {
+            document.getElementById('ex2-b').value = '';
+            document.getElementById('feedback2').className = 'feedback';
+            document.getElementById('feedback2').textContent = '';
+        }
+
+        // Übung 3: Dach-Problem
+        function checkExercise3() {
+            const input = parseFloat(document.getElementById('ex3-h').value);
+            const correct = Math.sqrt(64 - 25); // sqrt(8² - 5²) ≈ 6.24
+            const feedback = document.getElementById('feedback3');
+            
+            if (Math.abs(input - correct) < 0.2) {
+                feedback.className = 'feedback correct';
+                feedback.textContent = `✓ Richtig! Die Dachhöhe ist etwa ${correct.toFixed(2)} m. Berechnung: h = √(8² - 5²) = √(64 - 25) = √39 ≈ ${correct.toFixed(2)} m`;
+            } else {
+                feedback.className = 'feedback incorrect';
+                feedback.textContent = '✗ Nicht ganz. Tipp: Erst die Grundfläche durch 2 teilen! h² + 5² = 8², also h² = 64 - 25 = 39, h = √39 = ?';
+            }
+        }
+
+        function clearExercise3() {
+            document.getElementById('ex3-h').value = '';
+            document.getElementById('feedback3').className = 'feedback';
+            document.getElementById('feedback3').textContent = '';
+        }
+
+        // Geführte Aufgabe
+        function updateGuidedTask() {
+            const type = document.getElementById('taskType').value;
+            const inputsDiv = document.getElementById('guidedInputs');
+            
+            if (type === 'hypotenuse') {
+                inputsDiv.innerHTML = `
+                    <div class="input-group">
+                        <label>Kathete a =</label>
+                        <input type="number" id="guided-a" value="3" step="0.1" oninput="calculateGuided()">
+                        <span>cm</span>
+                    </div>
+                    <div class="input-group">
+                        <label>Kathete b =</label>
+                        <input type="number" id="guided-b" value="4" step="0.1" oninput="calculateGuided()">
+                        <span>cm</span>
+                    </div>
+                `;
+            } else {
+                inputsDiv.innerHTML = `
+                    <div class="input-group">
+                        <label>Kathete a =</label>
+                        <input type="number" id="guided-a" value="5" step="0.1" oninput="calculateGuided()">
+                        <span>cm</span>
+                    </div>
+                    <div class="input-group">
+                        <label>Hypotenuse c =</label>
+                        <input type="number" id="guided-c" value="13" step="0.1" oninput="calculateGuided()">
+                        <span>cm</span>
+                    </div>
+                `;
+            }
+            calculateGuided();
+        }
+
+        function calculateGuided() {
+            const type = document.getElementById('taskType').value;
+            const a = parseFloat(document.getElementById('guided-a').value) || 0;
+            
+            if (type === 'hypotenuse') {
+                const b = parseFloat(document.getElementById('guided-b').value) || 0;
+                const c = Math.sqrt(a*a + b*b);
+                
+                drawTriangle('guidedTriangle', a, b, c);
+                
+                document.getElementById('guidedSteps').innerHTML = `
+                    <div class="step">
+                        <strong>Schritt 1:</strong> Formel aufstellen<br>
+                        c² = a² + b²
+                    </div>
+                    <div class="step">
+                        <strong>Schritt 2:</strong> Werte einsetzen<br>
+                        c² = ${a}² + ${b}² = ${(a*a).toFixed(2)} + ${(b*b).toFixed(2)} = ${(a*a + b*b).toFixed(2)}
+                    </div>
+                    <div class="step">
+                        <strong>Schritt 3:</strong> Wurzel ziehen<br>
+                        c = √${(a*a + b*b).toFixed(2)} = ${c.toFixed(2)} cm
+                    </div>
+                `;
+                
+                document.getElementById('guidedResult').style.display = 'block';
+                document.getElementById('guidedResult').innerHTML = `<strong>Ergebnis: c = ${c.toFixed(2)} cm</strong>`;
+            } else {
+                const c = parseFloat(document.getElementById('guided-c').value) || 0;
+                const b = Math.sqrt(Math.max(0, c*c - a*a));
+                
+                drawTriangle('guidedTriangle', a, b, c);
+                
+                document.getElementById('guidedSteps').innerHTML = `
+                    <div class="step">
+                        <strong>Schritt 1:</strong> Formel umstellen<br>
+                        a² + b² = c²  →  b² = c² - a²
+                    </div>
+                    <div class="step">
+                        <strong>Schritt 2:</strong> Werte einsetzen<br>
+                        b² = ${c}² - ${a}² = ${(c*c).toFixed(2)} - ${(a*a).toFixed(2)} = ${Math.max(0, c*c - a*a).toFixed(2)}
+                    </div>
+                    <div class="step">
+                        <strong>Schritt 3:</strong> Wurzel ziehen<br>
+                        b = √${Math.max(0, c*c - a*a).toFixed(2)} = ${b.toFixed(2)} cm
+                    </div>
+                `;
+                
+                document.getElementById('guidedResult').style.display = 'block';
+                document.getElementById('guidedResult').innerHTML = `<strong>Ergebnis: b = ${b.toFixed(2)} cm</strong>`;
+            }
+        }
+
+        // Interaktives Dreieck
+        function updateInteractive() {
+            const a = parseFloat(document.getElementById('slider-a').value);
+            const b = parseFloat(document.getElementById('slider-b').value);
+            const c = Math.sqrt(a*a + b*b);
+            
+            document.getElementById('slider-a-value').textContent = `${a} cm`;
+            document.getElementById('slider-b-value').textContent = `${b} cm`;
+            
+            drawTriangle('interactiveTriangle', a*15, b*15, c*15, 400, 300);
+            
+            document.getElementById('interactive-calculation').innerHTML = `
+                ${a}² + ${b}² = c²<br>
+                ${(a*a).toFixed(2)} + ${(b*b).toFixed(2)} = ${(a*a + b*b).toFixed(2)}
+            `;
+            
+            document.getElementById('interactive-result').innerHTML = `<strong>c = ${c.toFixed(2)} cm</strong>`;
+        }
+
+        // Dreieck zeichnen
+        function drawTriangle(svgId, a, b, c, width = 350, height = 250) {
+            const svg = document.getElementById(svgId);
+            const scale = Math.min((width - 100) / Math.max(a, b), (height - 100) / Math.max(a, b));
+            const aScaled = a * scale;
+            const bScaled = b * scale;
+            
+            const x1 = 50;
+            const y1 = height - 50;
+            const x2 = x1;
+            const y2 = y1 - aScaled;
+            const x3 = x1 + bScaled;
+            const y3 = y1;
+            
+            svg.innerHTML = `
+                <line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#000" stroke-width="2"/>
+                <line x1="${x1}" y1="${y1}" x2="${x3}" y2="${y3}" stroke="#000" stroke-width="2"/>
+                <line x1="${x2}" y1="${y2}" x2="${x3}" y2="${y3}" stroke="#667eea" stroke-width="3"/>
+                <rect x="${x1}" y="${y1-10}" width="10" height="10" fill="none" stroke="#000" stroke-width="2"/>
+                <text x="${x1-35}" y="${(y1+y2)/2}" font-size="16" fill="#000" font-weight="bold">a=${a.toFixed(1)}</text>
+                <text x="${(x1+x3)/2-20}" y="${y1+25}" font-size="16" fill="#000" font-weight="bold">b=${b.toFixed(1)}</text>
+                <text x="${(x2+x3)/2+10}" y="${(y2+y3)/2-10}" font-size="16" fill="#667eea" font-weight="bold">c=${c.toFixed(2)}</text>
+            `;
+        }
+
+        // Praxisbeispiele
+        function checkReal1() {
+            const input = parseFloat(document.getElementById('real1-h').value);
+            const correct = 4; // sqrt(25 - 9) = 4
+            const feedback = document.getElementById('feedbackReal1');
+            
+            if (Math.abs(input - correct) < 0.1) {
+                feedback.className = 'feedback correct';
+                feedback.textContent = '✓ Richtig! Die Leiter reicht 4 Meter hoch.';
+            } else {
+                feedback.className = 'feedback incorrect';
+                feedback.textContent = '✗ Tipp: 3² + h² = 5²';
+            }
+        }
+
+        function checkReal2() {
+            const input = parseFloat(document.getElementById('real2-d').value);
+            const diagonalCm = Math.sqrt(80*80 + 45*45);
+            const correct = diagonalCm / 2.54; // ca. 36.2 Zoll
+            const feedback = document.getElementById('feedbackReal2');
+            
+            if (Math.abs(input - correct) < 1) {
+                feedback.className = 'feedback correct';
+                feedback.textContent = `✓ Richtig! Die Diagonale ist etwa ${correct.toFixed(1)} Zoll.`;
+            } else {
+                feedback.className = 'feedback incorrect';
+                feedback.textContent = '✗ Tipp: Erst Diagonale in cm berechnen, dann durch 2,54 teilen.';
+            }
+        }
+
+        function checkReal3() {
+            const input = parseFloat(document.getElementById('real3-d').value);
+            const correct = Math.sqrt(105*105 + 68*68); // ca. 125.3
+            const feedback = document.getElementById('feedbackReal3');
+            
+            if (Math.abs(input - correct) < 1) {
+                feedback.className = 'feedback correct';
+                feedback.textContent = `✓ Richtig! Die Diagonale ist etwa ${correct.toFixed(1)} m.`;
+            } else {
+                feedback.className = 'feedback incorrect';
+                feedback.textContent = '✗ Tipp: d² = 105² + 68²';
+            }
+        }
+
+        // Initial render
+        updateInteractive();
+    </script>
+</body>
+</html>
