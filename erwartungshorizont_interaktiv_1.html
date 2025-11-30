@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erwartungshorizont - Sicherungstabelle</title>
+    <style>
+        @page {
+            size: A4 landscape;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        h1 {
+            font-size: 26px;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #000;
+            padding-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        th {
+            border: 2px solid #000;
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+            font-size: 16px;
+            background-color: #e0e0e0;
+        }
+        
+        td {
+            border: 2px solid #000;
+            padding: 15px;
+            padding-bottom: 40px;
+            vertical-align: top;
+            font-size: 16px;
+            min-height: 100px;
+            transition: background-color 0.3s;
+            position: relative;
+            line-height: 1.6;
+        }
+        
+        .massnahme {
+            font-weight: bold;
+            width: 13%;
+            background-color: #f9f9f9;
+            padding-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .wann {
+            width: 10%;
+        }
+        
+        .was {
+            width: 25%;
+        }
+        
+        .wer {
+            width: 22%;
+        }
+        
+        .heute {
+            width: 22%;
+        }
+        
+        td.revealed {
+            background-color: #d4edda;
+        }
+        
+        .eingabefeld {
+            min-height: 80px;
+            outline: none;
+            display: block;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        .eingabefeld:empty:before {
+            content: attr(data-placeholder);
+            color: #ccc;
+            font-style: italic;
+            font-size: 14px;
+        }
+        
+        .loesung {
+            display: none;
+            min-height: 80px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        .loesung.show {
+            display: block;
+        }
+        
+        .info-icon {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            width: 26px;
+            height: 26px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+        
+        .info-icon:hover {
+            background-color: #2980b9;
+            transform: scale(1.1);
+        }
+        
+        .info-icon.active {
+            background-color: #27ae60;
+        }
+        
+        .footer {
+            margin-top: 20px;
+            border: 2px solid #000;
+            padding: 18px;
+            background-color: white;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        
+        .footer-input {
+            border-bottom: 2px solid #000;
+            display: inline-block;
+            min-width: 400px;
+            margin: 0 5px;
+        }
+        
+        .footer-loesung {
+            display: none;
+            color: #155724;
+            margin-top: 12px;
+            padding: 12px;
+            background-color: #d4edda;
+            border-radius: 5px;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+        
+        .footer-loesung.show {
+            display: block;
+        }
+        
+        @media print {
+            .controls {
+                display: none;
+            }
+            body {
+                background-color: white;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Sicherungstabelle Präsentation zu "Weg in die Diktatur"</h1>
+    
+    <div class="header">
+        <span>Datum: _______</span>
+        <span>Klasse: _______</span>
+    </div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th class="massnahme">Maßnahme</th>
+                <th class="wann">Wann?</th>
+                <th class="was">Was? (in einem Satz)</th>
+                <th class="wer">Wer betroffen?</th>
+                <th class="heute">Heute?</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- GRUPPE 1: KZ -->
+            <tr>
+                <td class="massnahme">Konzentrations-lager</td>
+                <td class="wann">
+                    <div class="eingabefeld" contenteditable="true" data-placeholder="Hier schreiben..."></div>
+                    <div class="loesung">März 1933<br>(oder: 22.3.1933)</div>
+                    <div class="info-icon" onclick="toggleLoesung(this)">i</div>
+                </td>
+                <td class="was">
+                    <div class="eingabefeld" contenteditable="true" data-placeholder="Hier schreiben..."></div>
+                    <div class="loesung">Hitler ließ Lager bauen, wo Gegner ohne Gerichtsverfahren eingesperrt wurden.</div>
+                    <div class="info-icon" onclick="toggleLoesung(this)">i</div>
+                </td>
+                <td class="wer">
+                    <div class="eingabefeld" contenteditable="true" data-placeholder="Hier schreiben..."></div>
+                    <div class="loesung">Zuerst: Politische Gegner (Kommunisten, Sozialdemokraten)<br>Später: Juden, Homosexuelle, Menschen mit Behinderungen</div>
+                    <div class="info-icon" onclick="toggleLoesung(this)">i</div>
+                </td>
+                <td class="heute">
+                    <div class="eingabefeld" contenteditable="true" data-placeholder="Hier schreiben..."></div>
+                    <div class="loesung">Folter verboten<br>Keine willkürliche Haft<br>Grundgesetz schützt Menschenwürde</div>
+                    <div class="info-icon" onclick="toggleLoesung(this)">i</div>
+                </td>
+            </tr>
+            
+            <!-- GRUPPE 2: BERUFSBEAMTENGESETZ -->
+            <tr>
+                <td class="massnahme">Berufsbeamten-gesetz</td>
+                <td class="wann">
+                    <div class="eingabefeld" contenteditable="true" data-placeholder="Hier schreiben..."></div>
+                    <div class="loesung">7. April 1933</div>
+                    <div class="info-icon" onclick="toggleLoesung(this)">i</div>
+                </td>
+                <td class="was">
+                    <div class="eingabefeld" contenteditable="true" data-placeholder="Hier schreiben..."></div>
+                    <div class="loesung">Juden durften nicht mehr im öffentlichen Dienst arbeiten (Arierparagraph).</div>
+                    <div class="info-icon" onclick="toggleLoesung(this)">i</div>
+                </td>
+                <td class="wer">
+                    <div class="eingabefeld" contenteditable="true" data-placeholder="Hier schreiben..."></div>
+                    <div class="loesung">Jüdische Beamte, Lehrer, Professoren, Künstler, Studenten</div>
+                    <div class="info-icon" onclick="toggleLoesung(this)">i</div>
+                </td>
+                <td class="heute">
+                    <div class="eingabefeld" contenteditable="true" data-placeholder="Hier schreiben..."></div>
+                    <div class="loesung">Diskriminierung wegen Religion/Herkunft verboten (Grundgesetz Artikel 3)</div>
+                    <div class="info-icon" onclick="toggleLoesung(this)">i</div>
+                </td>
+            </tr>
+            
+            <!-- GRUPPE 3: PARTEIENVERBOT -->
+            <tr>
+                <td class="massnahme">Verbot anderer Parteien</td>
+                <td class="wann">
+                    <div class="eingabefeld" contenteditable="true" data-placeholder="Hier schreiben..."></div>
+                    <div class="loesung">14. Juli 1933</div>
+                    <div class="info-icon" onclick="toggleLoesung(this)">i</div>
+                </td>
+                <td class="was">
+                    <div class="eingabefeld" contenteditable="true" data-placeholder="Hier schreiben..."></div>
+                    <div class="loesung">Alle Parteien außer der NSDAP wurden verboten. Deutschland wurde Einparteienstaat.</div>
+                    <div class="info-icon" onclick="toggleLoesung(this)">i</div>
+                </td>
+                <td class="wer">
+                    <div class="eingabefeld" contenteditable="true" data-placeholder="Hier schreiben..."></div>
+                    <div class="loesung">SPD, KPD, Zentrum und alle anderen Parteien mussten sich auflösen</div>
+                    <div class="info-icon" onclick="toggleLoesung(this)">i</div>
+                </td>
+                <td class="heute">
+                    <div class="eingabefeld" contenteditable="true" data-placeholder="Hier schreiben..."></div>
+                    <div class="loesung">Viele Parteien erlaubt (Pluralismus)<br>Ausnahmen: SRP (1952) und KPD (1956) verboten</div>
+                    <div class="info-icon" onclick="toggleLoesung(this)">i</div>
+                </td>
+            </tr>
+            
+            <!-- GRUPPE 4: PRESSEFREIHEIT -->
+            <tr>
+                <td class="massnahme">Ende der Pressefreiheit</td>
+                <td class="wann">
+                    <div class="eingabefeld" contenteditable="true" data-placeholder="Hier schreiben..."></div>
+                    <div class="loesung">1. Januar 1934<br>(Schriftleiter-gesetz)</div>
+                    <div class="info-icon" onclick="toggleLoesung(this)">i</div>
+                </td>
+                <td class="was">
+                    <div class="eingabefeld" contenteditable="true" data-placeholder="Hier schreiben..."></div>
+                    <div class="loesung">Nazis kontrollierten alle Zeitungen. Kritische Journalisten wurden entlassen.</div>
+                    <div class="info-icon" onclick="toggleLoesung(this)">i</div>
+                </td>
+                <td class="wer">
+                    <div class="eingabefeld" contenteditable="true" data-placeholder="Hier schreiben..."></div>
+                    <div class="loesung">Über 1300 Journalisten verloren ihre Arbeit<br>Nur "politisch zuverlässige" durften schreiben</div>
+                    <div class="info-icon" onclick="toggleLoesung(this)">i</div>
+                </td>
+                <td class="heute">
+                    <div class="eingabefeld" contenteditable="true" data-placeholder="Hier schreiben..."></div>
+                    <div class="loesung">Pressefreiheit ist Grundrecht (Artikel 5)<br>Journalisten dürfen kritisch berichten<br>Zensur verboten</div>
+                    <div class="info-icon" onclick="toggleLoesung(this)">i</div>
+                </td>
+            </tr>
+            
+            <!-- GRUPPE 5: GLEICHSCHALTUNG -->
+            <tr>
+                <td class="massnahme">Gleichschaltung</td>
+                <td class="wann">
+                    <div class="eingabefeld" contenteditable="true" data-placeholder="Hier schreiben..."></div>
+                    <div class="loesung">Ab 1933<br>(oder: 1933-1934)</div>
+                    <div class="info-icon" onclick="toggleLoesung(this)">i</div>
+                </td>
+                <td class="was">
+                    <div class="eingabefeld" contenteditable="true" data-placeholder="Hier schreiben..."></div>
+                    <div class="loesung">Alle Organisationen und Vereine wurden auf NSDAP-Ideologie ausgerichtet.</div>
+                    <div class="info-icon" onclick="toggleLoesung(this)">i</div>
+                </td>
+                <td class="wer">
+                    <div class="eingabefeld" contenteditable="true" data-placeholder="Hier schreiben..."></div>
+                    <div class="loesung">Alle Vereine<br>Jugendliche → Hitlerjugend (Pflicht)<br>Viele Vereine verboten</div>
+                    <div class="info-icon" onclick="toggleLoesung(this)">i</div>
+                </td>
+                <td class="heute">
+                    <div class="eingabefeld" contenteditable="true" data-placeholder="Hier schreiben..."></div>
+                    <div class="loesung">Viele verschiedene Vereine erlaubt<br>Pluralistische Gesellschaft<br>Vereinsfreiheit geschützt</div>
+                    <div class="info-icon" onclick="toggleLoesung(this)">i</div>
+                </td>
+            </tr>
+            
+            <!-- GRUPPE 6: FÜHRER UND REICHSKANZLER -->
+            <tr>
+                <td class="massnahme">Führer und Reichskanzler</td>
+                <td class="wann">
+                    <div class="eingabefeld" contenteditable="true" data-placeholder="Hier schreiben..."></div>
+                    <div class="loesung">2. August 1934<br>(Tod Hindenburgs)</div>
+                    <div class="info-icon" onclick="toggleLoesung(this)">i</div>
+                </td>
+                <td class="was">
+                    <div class="eingabefeld" contenteditable="true" data-placeholder="Hier schreiben..."></div>
+                    <div class="loesung">Hitler vereinigte die Ämter des Reichspräsidenten und Reichskanzlers in seiner Person.</div>
+                    <div class="info-icon" onclick="toggleLoesung(this)">i</div>
+                </td>
+                <td class="wer">
+                    <div class="eingabefeld" contenteditable="true" data-placeholder="Hier schreiben..."></div>
+                    <div class="loesung">Alle Soldaten mussten auf Hitler persönlich schwören<br>Totale Macht, keine Kontrolle</div>
+                    <div class="info-icon" onclick="toggleLoesung(this)">i</div>
+                </td>
+                <td class="heute">
+                    <div class="eingabefeld" contenteditable="true" data-placeholder="Hier schreiben..."></div>
+                    <div class="loesung">Bundeskanzler und Bundespräsident sind getrennt<br>Soldaten schwören auf Grundgesetz<br>Eid nicht personengebunden</div>
+                    <div class="info-icon" onclick="toggleLoesung(this)">i</div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="footer">
+        <p style="margin-bottom: 15px;">📝 Hitlers Ziel mit diesen Maßnahmen war: <span class="footer-input" id="footer-input" onclick="revealFooter()">Klicken für Lösung</span></p>
+        
+        <div class="footer-loesung" id="footer-loesung">
+            <strong>ERWARTETE ANTWORTEN:</strong><br>
+            • Hitler wollte totale Kontrolle über Deutschland<br>
+            • Diktatur errichten<br>
+            • Niemand sollte gegen ihn sein können<br>
+            • Alle Menschen sollten nur das denken/tun, was die NSDAP wollte<br>
+            • Gegner ausschalten und alle gleichschalten<br><br>
+            <strong>Bei schwachen SuS akzeptabel:</strong> "Diktatur", "Alle kontrollieren", "Totale Macht", "Niemand gegen ihn"
+        </div>
+    </div>
+    
+    <script>
+        function toggleLoesung(icon) {
+            const cell = icon.parentElement;
+            const eingabefeld = cell.querySelector('.eingabefeld');
+            const loesung = cell.querySelector('.loesung');
+            
+            if (loesung.classList.contains('show')) {
+                // Zurück zum Eingabefeld
+                loesung.classList.remove('show');
+                eingabefeld.style.display = 'block';
+                icon.classList.remove('active');
+                cell.classList.remove('revealed');
+            } else {
+                // Lösung anzeigen
+                eingabefeld.style.display = 'none';
+                loesung.classList.add('show');
+                icon.classList.add('active');
+                cell.classList.add('revealed');
+            }
+        }
+        
+        function showAll() {
+            const allIcons = document.querySelectorAll('.info-icon');
+            allIcons.forEach(icon => {
+                const cell = icon.parentElement;
+                const eingabefeld = cell.querySelector('.eingabefeld');
+                const loesung = cell.querySelector('.loesung');
+                
+                if (!loesung.classList.contains('show')) {
+                    eingabefeld.style.display = 'none';
+                    loesung.classList.add('show');
+                    icon.classList.add('active');
+                    cell.classList.add('revealed');
+                }
+            });
+            revealFooter();
+        }
+        
+        function resetAll() {
+            const allIcons = document.querySelectorAll('.info-icon');
+            allIcons.forEach(icon => {
+                const cell = icon.parentElement;
+                const eingabefeld = cell.querySelector('.eingabefeld');
+                const loesung = cell.querySelector('.loesung');
+                
+                loesung.classList.remove('show');
+                eingabefeld.style.display = 'block';
+                icon.classList.remove('active');
+                cell.classList.remove('revealed');
+            });
+            
+            // Reset footer
+            document.getElementById('footer-loesung').classList.remove('show');
+        }
+        
+        function revealFooter() {
+            document.getElementById('footer-loesung').classList.add('show');
+        }
+    </script>
+</body>
+</html>
